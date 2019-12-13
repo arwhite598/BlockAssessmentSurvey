@@ -21,9 +21,6 @@ class Question:
         return str(self.q_num) + " " + self.q_text + " " + self.answer_type + " " + self.answers + "\n"
 
     def to_json(self):
-        #return "{\"qId\": \"{}\", \"questionText\" : \"{}\", \"questionType\": \"{}\", \
-         #            \"answer\": \"{}\", \"skipLogic\": \"{}\", \"surveyNumber\": \"{}\"\}" \
-          #           .format(str(self.questionNum), self.questionText, self.questionType, self.answer, self.skip_logic, str(self.survey_num))
        return "{\n\"qId\": " + str(self.questionId) + ",\n\"qNum\": " + str(self.questionNum) + ",\n\"questionText\": \"" + self.questionText + "\",\n\"questionType\": \"" + self.questionType \
            + "\",\n\"answer\": \"" + self.answer + "\",\n\"surveyNumber\": " + str(self.survey_num) + "\",\n\"nextQuestion\": \""+ self.next_q + "\",\n\"nextSubQuestion\": \"" + str(self.next_sub_q) + "\"\n},\n"
 
@@ -51,7 +48,7 @@ def build_json_obj(q):
 
 
 # Firebase credentials & SDK setup
-cred = credentials.Certificate("/Users/dansher/Documents/UMD/courses/fall_2019/Handheld_Programming/blockassessmentsurvey-firebase-adminsdk-nl97q-ef495105d2.json")
+cred = credentials.Certificate("path_to_your_credential_file")
 firebase_admin.initialize_app(cred, {
     'databaseURL': 'https://blockassessmentsurvey.firebaseio.com/'
 })
@@ -61,8 +58,7 @@ ref = db.reference('Questions_Test_Run')
 print(ref.get())
 
 # Open questions file
-#q_file = open('/Users/dansher/Documents/UMD/courses/fall_2019/Handheld_Programming/BlockAssessmentSurvey/sample_questions.tsv')
-q_file = open('/Users/dansher/class_repos/436_project_demo/BlockAssessmentSurvey/sample_questions.tsv')
+q_file = open('path_to_your_question_file')
 flag = 0
 counter = 0
 survey_num = 0
